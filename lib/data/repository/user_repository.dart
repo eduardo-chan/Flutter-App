@@ -4,16 +4,21 @@ import '../models/user_model.dart';
 
 class UserRepository {
   final String apiUrl;
-  final String accessToken;
+  //final String accessToken;
 
-  UserRepository({required this.apiUrl, required this.accessToken});
+  UserRepository(
+      {
+        required this.apiUrl
+        //required this.accessToken
+      }
+  );
 
   Future<void> createUser(UserModel user) async {
     final response = await http.post(
       Uri.parse('$apiUrl/users'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
-        'Authorization': 'Bearer $accessToken',
+        //'Authorization': 'Bearer $accessToken',
       },
       body: jsonEncode(user.toJson()..remove('id')),
     );
@@ -27,7 +32,7 @@ class UserRepository {
     final response = await http.get(
       Uri.parse('$apiUrl/users/$id'),
       headers: <String, String>{
-        'Authorization': 'Bearer $accessToken',
+        //'Authorization': 'Bearer $accessToken',
       },
     );
 
@@ -43,7 +48,7 @@ class UserRepository {
       Uri.parse('$apiUrl/users'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
-        'Authorization': 'Bearer $accessToken',
+        //'Authorization': 'Bearer $accessToken',
       },
       body: jsonEncode(user.toJson()),
     );
@@ -57,7 +62,7 @@ class UserRepository {
     final response = await http.delete(
       Uri.parse('$apiUrl/users/$id'),
       headers: <String, String>{
-        'Authorization': 'Bearer $accessToken',
+        //'Authorization': 'Bearer $accessToken',
       },
     );
 
@@ -68,10 +73,10 @@ class UserRepository {
 
   Future<List<UserModel>> getAllUsers() async {
     final response = await http.get(
-      Uri.parse('$apiUrl/users'),
+      Uri.parse('$apiUrl'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
-        'Authorization': 'Bearer $accessToken',
+        //'Authorization': 'Bearer $accessToken',
       },
     );
 
